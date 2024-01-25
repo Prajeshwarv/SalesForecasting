@@ -1,0 +1,132 @@
+<div class="body">
+  <div class="container text-center body">
+    <div class="row pt-5 ">
+      <div class="col-md-6 offset-md-3 shadow-lg form rounded">
+        <h3 class="">Signup</h3>
+        <p class="mb-3">
+          Already a user?
+          <a routerLink="/signin" routerLinkActive="active" ariaCurrentWhenActive="page">signin</a>
+        </p>
+
+        <form class="needs-validation" [formGroup]="signupForm" (ngSubmit)="onSubmit()" novalidate>
+          <div *ngIf="signup && registerMessage === 'Successfully registered!'"
+            class="alert alert-success d-flex align-items-center">
+            <strong>{{this.registerMessage}} Redirecting...</strong>
+            <div class="spinner-border ms-auto" aria-hidden="true" role="status">
+            </div>
+          </div>
+          <div *ngIf="!signup && registerMessage === 'Email Already Exists, enter a different E-Mail'"
+            class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{this.registerMessage}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <div class="row g-2 mb-2">
+            <div class="col-md">
+              <div class="form-floating">
+
+                <input type="text" class="form-control"
+                  [ngClass]="(firstName.errors?.['required'] || firstName.errors?.['minlength'] || firstName.errors?.['pattern']) && (firstName.dirty || firstName.touched)? 'is-invalid': '' "
+                  id="fname" placeholder="Prajeshwar" formControlName="firstName" value="Prajeshwar" required />
+                <label for="fname">First Name</label>
+                <div class="invalid-feedback">
+                  {{
+                    firstName.errors?.['required']? "First Name is required!" : ""
+                  }}
+                  {{
+                    firstName.errors?.['minlength']? "First name must be at least 4 characters long!" : ""
+                  }}
+                  {{
+                    firstName.errors?.['pattern']? "First name cannot contain numbers or special characters!" : ""
+                  }}
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-floating">
+
+                <input type="text" class="form-control"
+                  [ngClass]="(lastName.errors?.['required'] || lastName.errors?.['minlength'] || lastName.errors?.['pattern']) && (lastName.dirty || lastName.touched)? 'is-invalid': '' "
+                  id="lname" placeholder="Varadharajan" formControlName="lastName" value="Varadhrajan" required />
+                <label for="lname">Last Name</label>
+
+                <div class="invalid-feedback">
+                  {{
+                    lastName.errors?.['required']? "Last Name is required!" : ""
+                  }}
+                  {{
+                    lastName.errors?.['minlength']? "Last name must be at least 4 characters long!" : ""
+                  }}
+                  {{
+                    lastName.errors?.['pattern']? "Last name cannot contain numbers or special characters!" : ""
+                  }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col-md">
+              <div class="form-floating">
+
+                <input type="email" class="form-control"
+                  [ngClass]="(email.errors?.['required'] || email.errors?.['pattern']) && (email.dirty || email.touched)? 'is-invalid': '' "
+                  id="email" placeholder="Prajeshwar@gmail.com" value="Prajeshwarv382@gmail.com" formControlName="email"
+                  required />
+                <label for="email">E-Mail</label>
+                <div class="invalid-feedback">
+                  {{
+                    email.errors?.['required']? "E-Mail is required!" : ""
+                  }}
+                  {{
+                    email.errors?.['pattern']? "Enter a valid E-Mail!" : ""
+                  }}
+                </div>
+
+
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-floating">
+
+                <input type="password" class="form-control"
+                  [ngClass]="(password.errors?.['required'] || password.errors?.['pattern']) && (password.dirty || password.touched)? 'is-invalid': '' "
+                  id="password" placeholder="Varadharajan" value="dWV5Atb8f@E" formControlName="password" required />
+                <label for="password">Password</label>
+                <div class="invalid-feedback">
+                  {{
+                    password.errors?.['required']? "Password is required!" : ""
+                  }}
+                  {{
+                    password.errors?.['pattern']? "Password Must contain at least one number and one uppercase and lowercase letter and special character, and at least 8 or
+                    more characters!" : ""
+                  }}
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+
+            <input type="password" class="form-control"
+              [ngClass]="(cpassword.errors?.['required'] || signupForm.errors?.['notEqual']) && (cpassword.dirty || cpassword.touched)? 'is-invalid': '' "
+              id="cpassword" placeholder="Varadharajan" value="dWV5Atb8f@E" formControlName="cpassword" required />
+            <label for="cpassword">Re-type Password</label>
+            <div class="invalid-feedback">
+              {{
+                cpassword.errors?.['required']? "Must Re-Type Password!" : ""
+              }}
+              {{
+                signupForm.errors?.['notEqual']? "Passwords do not match!" : ""
+              }}
+            </div>
+
+          </div>
+          <button class="btn btn-success" type="submit" [disabled]="!signupForm.valid">
+            Submit
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
